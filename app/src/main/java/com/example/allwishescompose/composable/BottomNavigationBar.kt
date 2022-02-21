@@ -26,7 +26,7 @@ fun BottomNavigationBar() {
     )
     val context = LocalContext.current
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.purple_700),
+//        backgroundColor = colorResource(id = R.color.purple_700),
         contentColor = Color.White
     ) {
         items.forEach { item ->
