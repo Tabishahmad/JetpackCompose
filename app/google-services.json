@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "583888397043",
+    "project_id": "everyday-greetings-e577c",
+    "storage_bucket": "everyday-greetings-e577c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583888397043:android:0f9b0272071e2c8972cd86",
+        "android_client_info": {
+          "package_name": "com.modlueinfotech.allwishesgif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583888397043-qcbh5o2cslm3lothafrjos3g2rqng9l3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVigEdAZyF8GNnu0coAENkYS2XZbIqYMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583888397043-qcbh5o2cslm3lothafrjos3g2rqng9l3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

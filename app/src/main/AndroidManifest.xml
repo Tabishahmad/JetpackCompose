@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.allwishescompose">
+    package="com.modlueinfotech.allwishesgif">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".WordsApp"
@@ -11,8 +11,17 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AllWishesCompose">
+
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="@string/apploving_key" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+
         <activity
-            android:name=".MainActivity"
+            android:name="com.modlueinfotech.allwishesgif.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AllWishesCompose.NoActionBar">
