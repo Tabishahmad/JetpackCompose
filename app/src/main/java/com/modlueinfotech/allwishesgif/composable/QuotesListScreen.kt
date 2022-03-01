@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.modlueinfotech.allwishesgif.R
 import com.modlueinfotech.allwishesgif.utils.NavigationDestinations
 import com.modlueinfotech.allwishesgif.viewmodel.AppViewModel
 import kotlin.random.Random
@@ -35,7 +34,7 @@ fun QuotesListScreen(navController: NavController?, viewModel: AppViewModel?, po
     Scaffold(
         topBar = { TopBar() },
         content = { QuotesListScreenBody(navController,viewModel, position) },
-        bottomBar = { AppAdOnBottom(nativeBannerAd) }
+        bottomBar = { AppAd(nativeBannerAd) }
     )
 }
 @Composable

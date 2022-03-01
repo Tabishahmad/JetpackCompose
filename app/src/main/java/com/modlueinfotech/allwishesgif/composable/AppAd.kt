@@ -17,7 +17,7 @@ val nativeAd : Int = 2
 val nativeBannerAd : Int = 3
 
 @Composable
-fun AppAdOnBottom(bannerType : Int){
+fun AppAd(bannerType : Int){
     Card(
         modifier = Modifier
             .padding(10.dp,10.dp,10.dp,10.dp)

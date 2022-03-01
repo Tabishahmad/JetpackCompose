@@ -1,5 +1,7 @@
 package com.modlueinfotech.allwishesgif.composable
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -12,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.ImagePainter
@@ -21,29 +25,26 @@ import coil.transform.CircleCropTransformation
 import com.modlueinfotech.allwishesgif.R
 import com.modlueinfotech.allwishesgif.utils.NavigationDestinations
 import com.modlueinfotech.allwishesgif.viewmodel.AppViewModel
+import java.io.File
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun ImageNGIFScreen(navController: NavController?,
-                    position:Int?,
-                    viewModel: AppViewModel) {
+fun SavedScreen(navController: NavController?) {
     Scaffold(
         topBar = { TopBar() },
         bottomBar = { AppAd(nativeBannerAd) },
         content = { padding-> androidx.compose.foundation.layout.Column(
                             modifier = Modifier.padding(padding)
-                ){ ImageNGIFContent(navController, position , viewModel)}}
+                ){ SavedScreenContent(navController)}}
     )
 
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImageNGIFContent(navController: NavController?,
-                    position:Int?,
-                    viewModel: AppViewModel
-) {
-    val appData by viewModel.freeGamesFlow.collectAsState()
+fun SavedScreenContent(navController: NavController?) {
+    val appData = getCollection(LocalContext.current)
+
     LazyStaggeredGrid(cells = StaggeredCells.Adaptive(128.dp),
         contentPadding = PaddingValues(
             start = 12.dp,
@@ -51,11 +52,7 @@ fun ImageNGIFContent(navController: NavController?,
             end = 12.dp,
             bottom = 16.dp
         ), content = {
-            val size1 = appData?.get(0)?.getGif()?.size
-            val size2 = appData?.get(1)?.getGif()?.size
-            val size3 = appData?.get(2)?.getGif()?.size
-            println(" image length size1 "+size1 + " size2  " + size2 + " size3 " +size3)
-            appData?.get(position!!)?.getGif()?.size?.let {
+            appData?.size?.let {
                 items(it) { index ->
                     Card(
                         modifier = Modifier
@@ -63,33 +60,32 @@ fun ImageNGIFContent(navController: NavController?,
                             .fillMaxWidth(),
                         elevation = 8.dp,
                     ) {
-                        val imageURL = appData?.get(position)?.getGif()!!.get(index)?.imageurl
-                        println("imageURL " + imageURL)
+                        val filePath =  appData?.get(index)
+                        println("filePath " + filePath)
                         // coil-compose
+//                        val painter = rememberImagePainter(data = File(filePath))
+                        val bitmap = BitmapFactory.decodeFile(filePath)
                         Image(
-                            painter = rememberImagePainter(
-                                data = imageURL,
-                                onExecute = ImagePainter.ExecuteCallback { _, _ -> true },
-                                builder = {
-                                    crossfade(true)
-                                    placeholder(R.drawable.gif)
-                                    size(OriginalSize)
-                                    transformations(CircleCropTransformation())
-                                }
-                            ),
+                            bitmap = bitmap.asImageBitmap(),
                             contentDescription = null,
                             modifier = Modifier
                                 .padding(4.dp)
                                 .clickable(onClick = {
-                                    val encodedUrl = URLEncoder.encode(
-                                        imageURL,
-                                        StandardCharsets.UTF_8.toString()
-                                    )
-                                    navController?.navigate(NavigationDestinations.imgPrevScreen + "/$encodedUrl")
+                                    navController?.navigate(NavigationDestinations.imgPrevScreen + "/$filePath")
                                 })
                         )
                     }
                 }
             }
         })
+}
+private fun getCollection(context: Context): List<String> {
+    val list = ArrayList<String>()
+    val file = File(context.getExternalFilesDir(null).toString() + "/Collection")
+    if (file.exists()) {
+        file.listFiles().forEach {
+            list.add(it.path)
+        }
+    }
+    return list.reversed()
 }

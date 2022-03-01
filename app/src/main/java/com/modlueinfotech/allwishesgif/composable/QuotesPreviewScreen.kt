@@ -32,7 +32,7 @@ fun QuotesPreviewScreen(quote: String) {
     Scaffold(
         topBar = { TopBar() },
         content = { QuotesPreviewScreenBody(quote) },
-        bottomBar = { AppAdOnBottom(nativeBannerAd) }
+        bottomBar = { AppAd(nativeBannerAd) }
     )
 }
 @Composable

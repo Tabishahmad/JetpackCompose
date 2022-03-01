@@ -9,4 +9,6 @@ object NavigationDestinations {
     const val quotesListScreen = "QuotesListScreen"
     const val quotesPreviewScreen = "QuotesPreviewScreen"
     const val testFigmaScreen = "TestFigmaScreen"
+    const val downloadAlertScreen = "DownloadAlertScreen"
+    const val savedScreen = "SavedScreen"
 }

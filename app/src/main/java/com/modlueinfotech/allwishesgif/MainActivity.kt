@@ -57,12 +57,19 @@ class MainActivity : LibSplashActivity() {
                         composable(NavigationDestinations.imgPrevScreen+"/{imgURL}") {navBackStack ->
                             // Extracting the argument
                             val imgURL = navBackStack.arguments?.getString("imgURL")!!
-                            ImagePreviewScreen(imgURL = imgURL)
+                            ImagePreviewScreen(navController,imgURL = imgURL)
                         }
                         composable(NavigationDestinations.quotesPreviewScreen+"/{quote}") {navBackStack ->
                             // Extracting the argument
                             val quote = navBackStack.arguments?.getString("quote")!!
                             QuotesPreviewScreen(quote = quote)
+                        }
+                        composable(NavigationDestinations.downloadAlertScreen) {navBackStack ->
+                            // Extracting the argument
+                            DownloadAlertScreen(navController)
+                        }
+                        composable(NavigationDestinations.savedScreen) {
+                            SavedScreen(navController)
                         }
                     }
                 }

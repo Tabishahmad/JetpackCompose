@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.modlueinfotech.allwishesgif.R
+import com.modlueinfotech.allwishesgif.utils.AppUtils
 import com.modlueinfotech.allwishesgif.utils.NavigationDestinations
 
 @Preview
@@ -41,11 +42,15 @@ fun MainScreenBody(navController: NavController?) {
                 .align(Alignment.CenterHorizontally)
                 .fillMaxHeight(fraction = 0.5f)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.name),
-                modifier = Modifier.padding(0.dp, 30.dp, 0.dp, 0.dp),
-                contentDescription = "Name",
-            )
+            if(AppUtils.isNetWorking(LocalContext.current)){
+                AppAd(nativeAd)
+            }else {
+                Image(
+                    painter = painterResource(id = R.drawable.name),
+                    modifier = Modifier.padding(0.dp, 30.dp, 0.dp, 0.dp),
+                    contentDescription = "Name",
+                )
+            }
         }
         Box() {
             Row(modifier = Modifier.fillMaxWidth()
@@ -55,17 +60,19 @@ fun MainScreenBody(navController: NavController?) {
                     modifier = Modifier
                         .weight(1f)
                         .clickable {
-                            navController?.navigate(NavigationDestinations.categoryScreen+"/GIF") {
+                            navController?.navigate(NavigationDestinations.categoryScreen + "/GIF") {
                             }
                         },
                     contentDescription = "Name",
                 )
                 Image(
                     painter = painterResource(id = R.drawable.images),
-                    modifier = Modifier.weight(1f).clickable {
-                        navController?.navigate(NavigationDestinations.categoryScreen+"/IMAGES") {
-                        }
-                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable {
+                            navController?.navigate(NavigationDestinations.categoryScreen + "/IMAGES") {
+                            }
+                        },
                     contentDescription = "Name",
                 )
             }
@@ -75,18 +82,22 @@ fun MainScreenBody(navController: NavController?) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.quotes),
-                    modifier = Modifier.weight(1f).clickable {
-                        navController?.navigate(NavigationDestinations.categoryScreen+"/QUOTES") {
-                        }
-                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable {
+                            navController?.navigate(NavigationDestinations.categoryScreen + "/QUOTES") {
+                            }
+                        },
                     contentDescription = "Name",
                 )
                 Image(
                     painter = painterResource(id = R.drawable.saved),
-                    modifier = Modifier.weight(1f).clickable {
-                        navController?.navigate(NavigationDestinations.categoryScreen+"/$"+"Saved") {
-                        }
-                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable {
+                            navController?.navigate(NavigationDestinations.savedScreen) {
+                            }
+                        },
                     contentDescription = "Name",
                 )
             }
