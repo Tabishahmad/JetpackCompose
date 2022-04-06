@@ -20,9 +20,9 @@ val nativeBannerAd : Int = 3
 fun AppAd(bannerType : Int){
     Card(
         modifier = Modifier
-            .padding(10.dp,10.dp,10.dp,10.dp)
+            .padding(5.dp)
             .fillMaxWidth(),
-            elevation = 8.dp,
+            elevation = 2.dp,
     ){
         //widget.ImageView
         AndroidView(factory = { ctx ->

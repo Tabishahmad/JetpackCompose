@@ -66,7 +66,9 @@ fun QuotesListItem(navController: NavController?,string: String,position: Int) {
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .fillMaxWidth().clickable(onClick = {
 //                val encodedUrl = URLEncoder.encode(string, StandardCharsets.UTF_8.toString())
-                navController?.navigate(NavigationDestinations.quotesPreviewScreen+"/$string")
+                println("QuotesPreviewScreenBody 1 "+position)
+//                navController?.navigate(NavigationDestinations.imageNGifScreen + "/$position")
+                navController?.navigate(NavigationDestinations.quotesPreviewScreen+"/$position"+"/$string")
             }),
         elevation = 2.dp,
         backgroundColor = Color(colorArray[position%5]),

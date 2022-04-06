@@ -40,10 +40,7 @@ fun categoryList(navController: NavController?, viewModel: AppViewModel, itemTyp
     println( " GET APP DATA " + appData)
     LazyVerticalGrid(cells = GridCells.Adaptive(128.dp),
         contentPadding = PaddingValues(
-            start = 12.dp,
-            top = 16.dp,
-            end = 12.dp,
-            bottom = 16.dp
+           5.dp
         ), content = {
             appData?.size?.let {
                 items(it) { index ->
@@ -51,17 +48,16 @@ fun categoryList(navController: NavController?, viewModel: AppViewModel, itemTyp
                         modifier = Modifier
                             .padding(4.dp)
                             .fillMaxWidth(),
-                        elevation = 8.dp,
+                        elevation = 2.dp,
                     ) {
                         val singleNode = appData!![index]
                         // coil-compose
                         Image(
                             painter = rememberImagePainter(
                                 data = singleNode.getCicon(),
-                                onExecute = ImagePainter.ExecuteCallback { _, _ -> true },
                                 builder = {
                                     crossfade(true)
-                                    placeholder(R.drawable.gif)
+                                    placeholder(R.drawable.loading)
                                     size(OriginalSize)
                                     transformations(CircleCropTransformation())
                                 }

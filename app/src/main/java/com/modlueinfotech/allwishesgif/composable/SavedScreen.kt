@@ -2,6 +2,8 @@ package com.modlueinfotech.allwishesgif.composable
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -38,7 +40,9 @@ fun SavedScreen(navController: NavController?) {
                             modifier = Modifier.padding(padding)
                 ){ SavedScreenContent(navController)}}
     )
-
+    BackHandler() {
+        navController?.navigate(NavigationDestinations.mainScreen)
+    }
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -63,7 +67,6 @@ fun SavedScreenContent(navController: NavController?) {
                         val filePath =  appData?.get(index)
                         println("filePath " + filePath)
                         // coil-compose
-//                        val painter = rememberImagePainter(data = File(filePath))
                         val bitmap = BitmapFactory.decodeFile(filePath)
                         Image(
                             bitmap = bitmap.asImageBitmap(),
@@ -71,7 +74,8 @@ fun SavedScreenContent(navController: NavController?) {
                             modifier = Modifier
                                 .padding(4.dp)
                                 .clickable(onClick = {
-                                    navController?.navigate(NavigationDestinations.imgPrevScreen + "/$filePath")
+                                    val encodedUrl = URLEncoder.encode(filePath, StandardCharsets.UTF_8.toString())
+                                    navController?.navigate(NavigationDestinations.imgPrevScreen + "/$encodedUrl")
                                 })
                         )
                     }

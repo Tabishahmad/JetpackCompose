@@ -40,10 +40,7 @@ fun SplashScreen(navController: NavController) {
 //            }
 //        }
     }
-    Image(painter = painterResource(id = R.drawable.bg),
-        alignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize(),
-        contentDescription = "Main BG Image")
+    FillBackground()
 
     Box(modifier = Modifier
         .padding()

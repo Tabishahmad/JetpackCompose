@@ -22,15 +22,15 @@ fun BottomNavigationBar() {
     )
     val context = LocalContext.current
     BottomNavigation(
-//        backgroundColor = colorResource(id = R.color.purple_700),
-        contentColor = Color.White
+        contentColor = Color.White,
+        backgroundColor = Color.White
     ) {
         items.forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.White.copy(0.4f),
+                selectedContentColor = Color.Black,
+                unselectedContentColor = Color.Black.copy(1f),
                 alwaysShowLabel = true,
                 selected = false,
                 onClick = {

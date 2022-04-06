@@ -4,13 +4,20 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.funwithphotography.namephotooncake.util.AdUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import com.modlueinfotech.allwishesgif.MainActivity
 import com.modlueinfotech.allwishesgif.R
 
 object AppUtils {
@@ -40,5 +47,11 @@ object AppUtils {
         }
         return isConnected
     }
-
+    fun showMessage(context: Context, str: String) {
+//        val snackbar = Snackbar.make(MainActivity.mainActivity, str, Snackbar.LENGTH_SHORT)
+//        snackbar.view.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+//        snackbar.view.findViewById<TextView>(R.id.snackbar_text).setTextColor(Color.BLACK)
+//        snackbar.show()
+        Toast.makeText(context,str,Toast.LENGTH_LONG).show()
+    }
 }

@@ -1,8 +1,10 @@
 package com.modlueinfotech.allwishesgif.composable
 
+import android.content.Context
 import android.graphics.fonts.FontStyle
 import android.view.Gravity
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -36,6 +38,7 @@ fun DownloadAlertScreen(navController: NavController?) {
         bottomBar = { DownloadAlertBottom(navController)},
         content = { DownloadAlertContent(navController)}
     )
+
 }
 @Composable
 fun DownloadAlertContent(navController: NavController?){
@@ -73,7 +76,11 @@ fun MyButton(navController: NavController?) {
             onClick = {
                 // when user is clicking the button
                 // we are displaying a toast message.
-                navController?.navigate(NavigationDestinations.savedScreen)
+                navController?.navigate(NavigationDestinations.savedScreen){
+//                    popUpTo(NavigationDestinations.imgPrevScreen){
+//                        inclusive = true
+//                    }
+                }
             },
             // in below line we are using modifier
             // which is use to add padding to our button
