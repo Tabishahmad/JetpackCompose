@@ -95,7 +95,13 @@ fun ImageNGIFContent(navController: NavController?,
                         Image(
                             painter = painter,
                             contentDescription = "",
-                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(10.dp)),
+                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(10.dp)).clickable {
+                                val encodedUrl = URLEncoder.encode(
+                                        imageURL,
+                                        StandardCharsets.UTF_8.toString()
+                                    )
+                                    navController?.navigate(NavigationDestinations.imgPrevScreen + "/$encodedUrl")
+                            },
                             contentScale = ContentScale.Crop
                         )
 //                        Image(

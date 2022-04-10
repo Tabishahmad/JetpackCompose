@@ -4,4 +4,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="more_app_url">https://play.google.com/store/apps/developer?id=Birthday+%26+Motivational+GIF+Apps</string>
+    <string name="pp_url">https://cutegreetings.s3.ap-south-1.amazonaws.com/privacypolicy.html</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.modlueinfotech.allwishesgif.composable
 
+import android.content.Context
+import android.view.View
 import android.widget.Toast
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -11,6 +13,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.modlueinfotech.allwishesgif.NavigationItem
+import com.modlueinfotech.allwishesgif.R
+import com.modlueinfotech.allwishesgif.utils.AppUtilJava
+import com.modlueinfotech.allwishesgif.utils.AppUtils
 
 @Composable
 fun BottomNavigationBar() {
@@ -35,17 +40,28 @@ fun BottomNavigationBar() {
                 selected = false,
                 onClick = {
                     when(item.route){
-                        "more" -> Toast.makeText(context , "Click on more",Toast.LENGTH_LONG).show()
-                        "rate" -> ""
-                        "privacy" -> ""
-                        "share" -> ""
+                        "more" -> moreApps(context)
+                        "rate" -> rateUs(context)
+                        "privacy" -> pp(context)
+                        "share" -> shareApp(context)
                     }
                 }
             )
         }
     }
 }
-
+fun moreApps(context:Context) {
+    AppUtilJava.getInstance().openUrl(context, context.getString(R.string.more_app_url))
+}
+fun pp(context:Context) {
+    AppUtilJava.getInstance().openUrl(context, context.getString(R.string.pp_url))
+}
+fun shareApp(context:Context) {
+    AppUtilJava.getInstance().shareApp(context)
+}
+fun rateUs(context:Context) {
+    AppUtilJava.getInstance().rateUs(context)
+}
 @Preview(showBackground = true)
 @Composable
 fun BottomNavigationBarPreview() {

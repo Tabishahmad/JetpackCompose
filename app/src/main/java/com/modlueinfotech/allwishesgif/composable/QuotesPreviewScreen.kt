@@ -3,21 +3,15 @@ package com.modlueinfotech.allwishesgif.composable
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.View
-import android.widget.Toast
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,26 +21,25 @@ import androidx.navigation.NavController
 import com.modlueinfotech.allwishesgif.MainActivity
 import com.modlueinfotech.allwishesgif.R
 import com.modlueinfotech.allwishesgif.utils.*
-import com.mopub.common.util.ImageUtils
 import java.io.File
 
 @Preview
 @Composable
 fun QuotesPreviewScreen(){
-    QuotesPreviewScreenBody(quote = "Quotes", position = 0)
+    QuotesPreviewScreenBody(null,quote = "Quotes", position = 0)
 }
 
 @Composable
-fun QuotesPreviewScreen(quote: String,position: Int?) {
+fun QuotesPreviewScreen(navController: NavController?,quote: String,position: Int?) {
     Scaffold(
         topBar = { TopBar() },
-        content = { QuotesPreviewScreenBody(quote,position) },
+        content = { QuotesPreviewScreenBody(navController,quote,position) },
         bottomBar = { AppAd(nativeBannerAd) }
     )
 }
 var jetCaptureView: MutableState<ProfileCardView>? = null
 @Composable
-fun QuotesPreviewScreenBody(quote : String,position: Int?) {
+fun QuotesPreviewScreenBody(navController: NavController?,quote : String,position: Int?) {
     println("QuotesPreviewScreenBody "+position)
     jetCaptureView = remember { mutableStateOf(ProfileCardView(MainActivity.mainActivity)) }
     val context = LocalContext.current
@@ -83,7 +76,8 @@ fun QuotesPreviewScreenBody(quote : String,position: Int?) {
                         .weight(1f)
                         .height(90.dp)
                         .clickable {
-
+                            jetCaptureView?.value?.saveQuotesItem(
+                                (jetCaptureView?.value as ProfileCardView),navController,context,".jpg")
                         },
                     contentDescription = "Name",
                 )
@@ -93,7 +87,7 @@ fun QuotesPreviewScreenBody(quote : String,position: Int?) {
                         .weight(1f)
                         .height(90.dp)
                         .clickable {
-
+                            jetCaptureView?.value?.shareQuotesWhatsapp(jetCaptureView?.value as ProfileCardView)
                         },
                     contentDescription = "Name",
                 )
@@ -103,8 +97,7 @@ fun QuotesPreviewScreenBody(quote : String,position: Int?) {
                         .weight(1f)
                         .height(90.dp)
                         .clickable {
-                            jetCaptureView?.value?.capture(jetCaptureView?.value as ProfileCardView)
-//                            shareImage(this@Box as View)
+                            jetCaptureView?.value?.shareQuotes(jetCaptureView?.value as ProfileCardView)
                         },
                     contentDescription = "Name",
                 )

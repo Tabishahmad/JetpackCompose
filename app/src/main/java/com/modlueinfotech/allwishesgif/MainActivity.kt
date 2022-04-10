@@ -65,7 +65,7 @@ class MainActivity : LibSplashActivity() {
                             val position = navBackStack.arguments?.getString("position")
                             val quote = navBackStack.arguments?.getString("quote")!!
                             println("QuotesPreviewScreenBody 2 "+position)
-                            QuotesPreviewScreen(quote,Integer.parseInt(position))
+                            QuotesPreviewScreen(navController,quote,Integer.parseInt(position))
                         }
                         composable(NavigationDestinations.downloadAlertScreen) {navBackStack ->
                             // Extracting the argument

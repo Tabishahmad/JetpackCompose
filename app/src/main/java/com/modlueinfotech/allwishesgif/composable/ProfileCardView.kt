@@ -5,11 +5,11 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.AbstractComposeView
+import androidx.navigation.NavController
 import com.modlueinfotech.allwishesgif.MainActivity
-import com.modlueinfotech.allwishesgif.utils.AppUtilJava
-import com.modlueinfotech.allwishesgif.utils.MyImageUtils
-import com.modlueinfotech.allwishesgif.utils.ShareUtils
+import com.modlueinfotech.allwishesgif.utils.*
 import com.mopub.common.util.ImageUtils
+import java.io.File
 
 class ProfileCardView@JvmOverloads constructor(
     context: Context,
@@ -34,9 +34,27 @@ class ProfileCardView@JvmOverloads constructor(
         // This is a ComposableUI function
         QuotesPreviewCard(quote.value,position.value)
     }
-    fun capture(view: ProfileCardView) {
+    fun shareQuotes(view: ProfileCardView) {
+        val bitmap = MyImageUtils.generateBitmap(view)
+        AppUtilJava.getInstance().shareBitmap(MainActivity.mainActivity,bitmap,false)
+    }
+    fun shareQuotesWhatsapp(view: ProfileCardView) {
         val bitmap = MyImageUtils.generateBitmap(view)
         AppUtilJava.getInstance().shareBitmap(MainActivity.mainActivity,bitmap,true)
     }
-
+    fun saveQuotesItem(view: ProfileCardView,navController: NavController?, context:Context, extension: String) {
+        val bitmap = MyImageUtils.generateBitmap(view)
+        val file = AppUtilJava.getInstance().getFile(context, bitmap)
+        file.let {
+            val direct = File(
+                context.getExternalFilesDir(null).toString() + "/Collection"
+            )
+            if (!direct.exists()) {
+                direct.mkdirs()
+            }
+            val f = File(direct.absolutePath, "" + System.currentTimeMillis() + extension)
+            file?.copyTo(f)
+            navController?.navigate(NavigationDestinations.downloadAlertScreen)
+        }
+    }
 }
